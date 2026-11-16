@@ -15,16 +15,22 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 urls = {Repository = "https://github.com/cvg/LightGlue/"}
-dynamic = ["dependencies"]
+# Static dependencies so resolvers (uv/pixi) read metadata without building the package.
+# Keep in sync with `requirements.txt`.
+dependencies = [
+    "torch>=1.9.1",
+    "torchvision>=0.3",
+    "numpy",
+    "opencv-python",
+    "matplotlib",
+    "kornia>=0.6.11",
+]
 
 [project.optional-dependencies]
 dev = ["black==23.12.1", "flake8", "isort"]
 
 [tool.setuptools]
 packages = ["lightglue"]
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
 
 [tool.isort]
 profile = "black"
